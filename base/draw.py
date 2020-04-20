@@ -36,7 +36,7 @@ def scanline_convert(polygons, i, screen, zbuffer ):
         before = False
         dx1 = dx2
     color = (105 + randrange(150), 105 + randrange(150), 105 + randrange(150))
-    while y <= m[1]:
+    while y <= t[1]:
         draw_line(int(x0), int(y), 0, int(x1), int(y), 0, screen, zbuffer, color)
         #swap dx1 if needed
         if before and y >= m[1]:
