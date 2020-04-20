@@ -20,6 +20,7 @@ def scanline_convert(polygons, i, screen, zbuffer ):
     #middle vertex
     m = vertices[0]
     #scanline code
+    before = True
     x0, x1, y = b[0], b[0], b[1]
     #top and bottom need to have diff y to be a triangle
     dx0 = (t[0] - b[0]) / (t[1] - b[1])
@@ -41,6 +42,7 @@ def scanline_convert(polygons, i, screen, zbuffer ):
         if before and y >= m[1]:
             dx1 = dx2
             x1 = m[0]
+            before = False
         #move the endpoints
         x0 += dx0
         x1 += dx1
