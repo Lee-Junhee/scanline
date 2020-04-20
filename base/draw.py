@@ -20,22 +20,22 @@ def scanline_convert(polygons, i, screen, zbuffer ):
     #middle vertex
     m = vertices[0]
     #scanline code
-    x0, x1, y = b[0], b[0], int(b[1])
-    try:
-        dx0 = (t[0] - b[0]) / (t[1] - b[1])
-    except ZeroDivisionError:
-        pass
+    x0, x1, y = b[0], b[0], b[1]
+    #top and bottom need to have diff y to be a triangle
+    dx0 = (t[0] - b[0]) / (t[1] - b[1])
     try:
         dx1 = (m[0] - b[0]) / (m[1] - b[1])
     except ZeroDivisionError:
+        #if m and b have same y, should switch over to dx2 immediately
         pass
     try:
         dx2 = (t[0] - m[0]) / (t[1] - m[1])
     except ZeroDivisionError:
+        #if t and m have same y, will change to dx2 for last one, shouldn't matter too much
         dx2 = 0
     color = (105 + randrange(150), 105 + randrange(150), 105 + randrange(150))
     while y <= t[1]:
-        draw_line(int(x0), y, 0, int(x1), y, 0, screen, zbuffer, color)
+        draw_line(int(x0), int(y), 0, int(x1), int(y), 0, screen, zbuffer, color)
         #swap dx1 if needed
         if y >= m[1]:
             dx1 = dx2
