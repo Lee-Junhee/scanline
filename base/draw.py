@@ -48,6 +48,7 @@ def scanline_convert(polygons, i, screen, zbuffer ):
             x1 = m[0]
         #move the endpoints
         x0 += dx0
+        print(x0)
         x1 += dx1
         y += 1
     
