@@ -40,7 +40,7 @@ def scanline_convert(polygons, i, screen, zbuffer ):
     while y <= t[1]:
         draw_line(int(x0), int(y), 0, int(x1), int(y), 0, screen, zbuffer, color)
         #swap dx1 if needed
-        if before and y >= m[1]:
+        if before and y >= m[1] and y != t[1]:
             dx1 = dx2
             x1 = m[0]
             before = False
