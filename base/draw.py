@@ -23,6 +23,8 @@ def scanline_convert(polygons, i, screen, zbuffer ):
     x0, x1, y = b[0], b[0], b[1]
     #top and bottom need to have diff y to be a triangle
     dx0 = (t[0] - b[0]) / (t[1] - b[1])
+    print(t)
+    print(b)
     print(dx0)
     try:
         dx1 = (m[0] - b[0]) / (m[1] - b[1])
