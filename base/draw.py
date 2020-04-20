@@ -1,9 +1,41 @@
 from display import *
 from matrix import *
 from gmath import *
+from random import randrange
 
 def scanline_convert(polygons, i, screen, zbuffer ):
-    pass
+    vertices = polygons[i:i+3]
+    #find the bottom vertex
+    b = vertices[0]
+    if vertices[1][1] < b[1]:
+        b = vertices[1]
+    if vertices[2][1] < b[1]:
+        b = vertices[2]
+    vertices.remove(b)
+    #find the top vertex
+    t = vertices[0]
+    if vertices[1][1] > t[1]:
+        t = vertices[1]
+    vertices.remove(t)
+    #middle vertex
+    m = vertices[0]
+    #scanline code
+    x0 = b[0], x1 = b[0], y0 = b[1]
+    dx0 = (t[0] - b[0]) / (t[1] - b[1])
+    dx1 = (m[0] - b[0]) / (m[1] - b[1])
+    dx1_1 = (t[0] - m[0]) / (t[1] - m[1])
+    color = (105 + randrange(150), 105 + randrange(250), 105 + randrange(250))
+    while y <= t[1]
+        draw_line(x0, y, 0, x1, y, 0, screen, zbuffer, color)
+        #move the endpoints
+        x0+= dx0
+        x1+= dx1
+        y+= 1
+        #swap dx1 if neeced
+        if y >= m[1]
+            dx1 = dx1_1
+            x1 = m[0]
+    
 
 def add_polygon( polygons, x0, y0, z0, x1, y1, z1, x2, y2, z2 ):
     add_point(polygons, x0, y0, z0)
@@ -21,27 +53,28 @@ def draw_polygons( polygons, screen, zbuffer, color ):
         normal = calculate_normal(polygons, point)[:]
         #print normal
         if normal[2] > 0:
-            draw_line( int(polygons[point][0]),
-                       int(polygons[point][1]),
-                       polygons[point][2],
-                       int(polygons[point+1][0]),
-                       int(polygons[point+1][1]),
-                       polygons[point+1][2],
-                       screen, zbuffer, color)
-            draw_line( int(polygons[point+2][0]),
-                       int(polygons[point+2][1]),
-                       polygons[point+2][2],
-                       int(polygons[point+1][0]),
-                       int(polygons[point+1][1]),
-                       polygons[point+1][2],
-                       screen, zbuffer, color)
-            draw_line( int(polygons[point][0]),
-                       int(polygons[point][1]),
-                       polygons[point][2],
-                       int(polygons[point+2][0]),
-                       int(polygons[point+2][1]),
-                       polygons[point+2][2],
-                       screen, zbuffer, color)
+            #draw_line( int(polygons[point][0]),
+            #           int(polygons[point][1]),
+            #           polygons[point][2],
+            #           int(polygons[point+1][0]),
+            #           int(polygons[point+1][1]),
+            #           polygons[point+1][2],
+            #           screen, zbuffer, color)
+            #draw_line( int(polygons[point+2][0]),
+            #           int(polygons[point+2][1]),
+            #           polygons[point+2][2],
+            #           int(polygons[point+1][0]),
+            #           int(polygons[point+1][1]),
+            #           polygons[point+1][2],
+            #           screen, zbuffer, color)
+            #draw_line( int(polygons[point][0]),
+            #           int(polygons[point][1]),
+            #           polygons[point][2],
+            #           int(polygons[point+2][0]),
+            #           int(polygons[point+2][1]),
+            #           polygons[point+2][2],
+            #           screen, zbuffer, color)
+            scanline_convert(polygons, point, screen, zbuffer)
         point+= 3
 
 
@@ -143,13 +176,13 @@ def add_torus(polygons, cx, cy, cz, r0, r1, step ):
     for lat in range(lat_start, lat_stop):
         for longt in range(longt_start, longt_stop):
 
-            p0 = lat * step + longt;
+            p0 = lat * step + longt
             if (longt == (step - 1)):
-                p1 = p0 - longt;
+                p1 = p0 - longt
             else:
-                p1 = p0 + 1;
-            p2 = (p1 + step) % (step * step);
-            p3 = (p0 + step) % (step * step);
+                p1 = p0 + 1
+            p2 = (p1 + step) % (step * step)
+            p3 = (p0 + step) % (step * step)
 
             add_polygon(polygons,
                         points[p0][0],
@@ -185,9 +218,9 @@ def generate_torus( cx, cy, cz, r0, r1, step ):
         for circle in range(circ_start, circ_stop):
             circ = circle/float(step)
 
-            x = math.cos(2*math.pi * rot) * (r0 * math.cos(2*math.pi * circ) + r1) + cx;
-            y = r0 * math.sin(2*math.pi * circ) + cy;
-            z = -1*math.sin(2*math.pi * rot) * (r0 * math.cos(2*math.pi * circ) + r1) + cz;
+            x = math.cos(2*math.pi * rot) * (r0 * math.cos(2*math.pi * circ) + r1) + cx
+            y = r0 * math.sin(2*math.pi * circ) + cy
+            z = -1*math.sin(2*math.pi * rot) * (r0 * math.cos(2*math.pi * circ) + r1) + cz
 
             points.append([x, y, z])
     return points
@@ -200,8 +233,8 @@ def add_circle( points, cx, cy, cz, r, step ):
 
     while i <= step:
         t = float(i)/step
-        x1 = r * math.cos(2*math.pi * t) + cx;
-        y1 = r * math.sin(2*math.pi * t) + cy;
+        x1 = r * math.cos(2*math.pi * t) + cx
+        y1 = r * math.sin(2*math.pi * t) + cy
 
         add_edge(points, x0, y0, cz, x1, y1, cz)
         x0 = x1
