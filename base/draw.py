@@ -20,7 +20,7 @@ def scanline_convert(polygons, i, screen, zbuffer ):
     #middle vertex
     m = vertices[0]
     #scanline code
-    x0, x1, y0 = b[0], b[0], b[1]
+    x0, x1, y = b[0], b[0], b[1]
     try:
         dx0 = (t[0] - b[0]) / (t[1] - b[1])
         dx1 = (m[0] - b[0]) / (m[1] - b[1])
