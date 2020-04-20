@@ -32,7 +32,7 @@ def scanline_convert(polygons, i, screen, zbuffer ):
         x1+= dx1
         y+= 1
         #swap dx1 if neeced
-        if y >= m[1]
+        if y >= m[1]:
             dx1 = dx1_1
             x1 = m[0]
     
