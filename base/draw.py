@@ -23,7 +23,13 @@ def scanline_convert(polygons, i, screen, zbuffer ):
     x0, x1, y = b[0], b[0], b[1]
     try:
         dx0 = (t[0] - b[0]) / (t[1] - b[1])
+    except ZeroDivisionError:
+        pass
+    try:
         dx1 = (m[0] - b[0]) / (m[1] - b[1])
+    except ZeroDivisionError:
+        pass
+    try:
         dx1_1 = (t[0] - m[0]) / (t[1] - m[1])
     except ZeroDivisionError:
         pass
