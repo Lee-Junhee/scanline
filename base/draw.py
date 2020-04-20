@@ -35,6 +35,7 @@ def scanline_convert(polygons, i, screen, zbuffer ):
         #if m and b have same y, should switch over to dx2 immediately
         before = False
         dx1 = dx2
+        x1 = m[0]
     color = (105 + randrange(150), 105 + randrange(150), 105 + randrange(150))
     while y <= t[1]:
         draw_line(int(x0), int(y), 0, int(x1), int(y), 0, screen, zbuffer, color)
