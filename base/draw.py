@@ -32,7 +32,7 @@ def scanline_convert(polygons, i, screen, zbuffer ):
         dx2 = (t[0] - m[0]) / (t[1] - m[1])
     except ZeroDivisionError:
         #if t and m have same y, will change to dx2 for last one, shouldn't matter too much
-        dx2 = 0
+        pass
     color = (105 + randrange(150), 105 + randrange(150), 105 + randrange(150))
     while y <= t[1]:
         draw_line(int(x0), int(y), 0, int(x1), int(y), 0, screen, zbuffer, color)
