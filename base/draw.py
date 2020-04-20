@@ -38,7 +38,10 @@ def scanline_convert(polygons, i, screen, zbuffer ):
         draw_line(int(x0), int(y), 0, int(x1), int(y), 0, screen, zbuffer, color)
         #swap dx1 if needed
         if y >= m[1]:
-            dx1 = dx2
+            try:
+                dx1 = dx2
+            except UnboundLocalError:
+                pass
             x1 = m[0]
         #move the endpoints
         x0+= dx0
