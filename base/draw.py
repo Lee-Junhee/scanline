@@ -28,22 +28,21 @@ def scanline_convert(polygons, i, screen, zbuffer ):
     try:
         dx1 = (m[0] - b[0]) / (m[1] - b[1])
     except ZeroDivisionError:
-        print(m)
-        print(b)
+        pass
     try:
         dx2 = (t[0] - m[0]) / (t[1] - m[1])
     except ZeroDivisionError:
-        pass
+        dx2 = 0
     color = (105 + randrange(150), 105 + randrange(150), 105 + randrange(150))
     while y <= t[1]:
         draw_line(int(x0), y, 0, int(x1), y, 0, screen, zbuffer, color)
+        #swap dx1 if needed
+        if y >= m[1]:
+            dx1 = dx2
+            x1 = m[0]
         #move the endpoints
         x0+= dx0
         x1+= dx1
-        #swap dx1 if neeced
-        if y > m[1]:
-            dx1 = dx2
-            x1 = m[0]
         y+= 1
     
 
