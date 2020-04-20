@@ -35,7 +35,7 @@ def scanline_convert(polygons, i, screen, zbuffer ):
         pass
     color = (105 + randrange(150), 105 + randrange(150), 105 + randrange(150))
     while y <= t[1]:
-        draw_line(x0, y, 0, x1, y, 0, screen, zbuffer, color)
+        draw_line(int(x0), y, 0, int(x1), y, 0, screen, zbuffer, color)
         #move the endpoints
         x0+= dx0
         x1+= dx1
