@@ -25,7 +25,7 @@ def scanline_convert(polygons, i, screen, zbuffer ):
     dx1 = (m[0] - b[0]) / (m[1] - b[1])
     dx1_1 = (t[0] - m[0]) / (t[1] - m[1])
     color = (105 + randrange(150), 105 + randrange(250), 105 + randrange(250))
-    while y <= t[1]
+    while y <= t[1]:
         draw_line(x0, y, 0, x1, y, 0, screen, zbuffer, color)
         #move the endpoints
         x0+= dx0
