@@ -23,6 +23,7 @@ def scanline_convert(polygons, i, screen, zbuffer ):
     x0, x1, y = b[0], b[0], b[1]
     #top and bottom need to have diff y to be a triangle
     dx0 = (t[0] - b[0]) / (t[1] - b[1])
+    print(dx0)
     try:
         dx1 = (m[0] - b[0]) / (m[1] - b[1])
     except ZeroDivisionError:
@@ -44,9 +45,9 @@ def scanline_convert(polygons, i, screen, zbuffer ):
                 pass
             x1 = m[0]
         #move the endpoints
-        x0+= dx0
-        x1+= dx1
-        y+= 1
+        x0 += dx0
+        x1 += dx1
+        y += 1
     
 
 def add_polygon( polygons, x0, y0, z0, x1, y1, z1, x2, y2, z2 ):
