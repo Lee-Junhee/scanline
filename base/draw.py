@@ -30,7 +30,7 @@ def scanline_convert(polygons, i, screen, zbuffer ):
     except ZeroDivisionError:
         pass
     try:
-        dx1_1 = (t[0] - m[0]) / (t[1] - m[1])
+        dx2 = (t[0] - m[0]) / (t[1] - m[1])
     except ZeroDivisionError:
         pass
     color = (105 + randrange(150), 105 + randrange(150), 105 + randrange(150))
@@ -42,7 +42,7 @@ def scanline_convert(polygons, i, screen, zbuffer ):
         y+= 1
         #swap dx1 if neeced
         if y > m[1]:
-            dx1 = dx1_1
+            dx1 = dx2
             x1 = m[0]
     
 
